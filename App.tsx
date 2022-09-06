@@ -3,16 +3,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import firebase from 'firebase/compat';
 import React from 'react';
 import Loading from './components/auth/loading';
-
-const firebaseConfig = {
-    apiKey: 'AIzaSyDKz6RMFuREua2Brdhau1crPiHsgOdEH3Y',
-    authDomain: 'instagram-clone-b92ac.firebaseapp.com',
-    projectId: 'instagram-clone-b92ac',
-    storageBucket: 'instagram-clone-b92ac.appspot.com',
-    messagingSenderId: '102849493065',
-    appId: '1:102849493065:web:e3197c492016c53d646798',
-    measurementId: 'G-8DV1NBSCN5'
-};
+import Login from './components/auth/login';
+import Register from './components/auth/register';
+import { firebaseConfig } from './private-config/firebase.config';
 
 if (firebase.apps.length === 0) {
     firebase.initializeApp(firebaseConfig);
@@ -30,6 +23,8 @@ export default function App() {
                         headerShown: false
                     }}
                 />
+                <Stack.Screen name={'Register'} component={Register} />
+                <Stack.Screen name={'Login'} component={Login} />
             </Stack.Navigator>
         </NavigationContainer>
     );

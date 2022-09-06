@@ -7,6 +7,6 @@ export default ({ navigation }) => (
             title={'register' + ''}
             onPress={() => navigation.navigate('Register')}
         />
-        <Button title={'logina'} onPress={() => navigation.navigate('Login')} />
+        <Button title={'Login'} onPress={() => navigation.navigate('Login')} />
     </View>
 );

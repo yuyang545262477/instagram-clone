@@ -5,27 +5,25 @@ import { Button, TextInput, View } from 'react-native';
 interface IRegisterState {
     email: string;
     password: string;
-    name: string;
 }
 
-class Register extends Component<{}, IRegisterState> {
+class Login extends Component<{}, IRegisterState> {
     constructor(props) {
         super(props);
         this.state = {
             email: '',
-            password: '',
-            name: ''
+            password: ''
         };
-        this.onSignUp = this.onSignUp.bind(this);
+        this.onSignIn = this.onSignIn.bind(this);
     }
 
     render() {
         return (
             <View>
-                <TextInput
-                    placeholder={'name'}
-                    onChangeText={(name) => this.setState({ name })}
-                />
+                {/*<TextInput*/}
+                {/*    placeholder={'name'}*/}
+                {/*    onChangeText={(name) => this.setState({ name })}*/}
+                {/*/>*/}
                 <TextInput
                     placeholder={'email'}
                     onChangeText={(email) => this.setState({ email })}
@@ -35,16 +33,16 @@ class Register extends Component<{}, IRegisterState> {
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({ password })}
                 />
-                <Button onPress={() => this.onSignUp()} title={'Sign Up'} />
+                <Button onPress={() => this.onSignIn()} title={'Login'} />
             </View>
         );
     }
 
-    private onSignUp() {
+    private onSignIn() {
         const { password, email } = this.state;
         firebase
             .auth()
-            .createUserWithEmailAndPassword(email, password)
+            .signInWithEmailAndPassword(email, password)
             .then((result) => {
                 console.log(result);
             })
@@ -54,4 +52,4 @@ class Register extends Component<{}, IRegisterState> {
     }
 }
 
-export default Register;
+export default Login;
