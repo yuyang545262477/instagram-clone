@@ -45,7 +45,7 @@ export default class App extends Component<{}, AppState> {
     }
 
     render() {
-        const { loaded } = this.state;
+        const { loaded, loggedIn } = this.state;
         if (!loaded) {
             return (
                 <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -53,15 +53,21 @@ export default class App extends Component<{}, AppState> {
                 </View>
             );
         }
-
+        if (!loggedIn) {
+            return (
+                <NavigationContainer>
+                    <Stack.Navigator initialRouteName="Loading">
+                        <Stack.Screen name="Loading" component={Loading} />
+                        <Stack.Screen name="Login" component={Login} />
+                        <Stack.Screen name="Register" component={Register} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            );
+        }
         return (
-            <NavigationContainer>
-                <Stack.Navigator initialRouteName="Loading">
-                    <Stack.Screen name="Loading" component={Loading} />
-                    <Stack.Screen name="Login" component={Login} />
-                    <Stack.Screen name="Register" component={Register} />
-                </Stack.Navigator>
-            </NavigationContainer>
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+                <Text>User is logged in</Text>
+            </View>
         );
     }
 }
