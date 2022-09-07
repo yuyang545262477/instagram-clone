@@ -73,7 +73,17 @@ export default class App extends Component<{}, AppState> {
         }
         return (
             <Provider store={store}>
-                <Main />;
+                <NavigationContainer>
+                    <Stack.Navigator initialRouteName="Main">
+                        <Stack.Screen
+                            name={'Main'}
+                            component={Main}
+                            options={{
+                                headerShown: false
+                            }}
+                        />
+                    </Stack.Navigator>
+                </NavigationContainer>
             </Provider>
         );
     }
