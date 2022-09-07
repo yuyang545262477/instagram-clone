@@ -43,8 +43,8 @@ class Login extends Component<{}, IRegisterState> {
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
-            .then((result) => {
-                console.log(result);
+            .then(() => {
+                // console.log(result);
             })
             .catch((error) => {
                 console.log(error);

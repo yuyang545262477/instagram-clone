@@ -1,11 +1,14 @@
 import { Camera, CameraType } from 'expo-camera';
 import { isNil } from 'lodash';
-import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Button, Image, StyleSheet, Text, View } from 'react-native';
 
 export const Add = () => {
     const [hasPermission, setHasPermission] = useState(null);
     const [type, setType] = useState<CameraType>(CameraType.back);
+    const cameraRef = useRef(null);
+    const [image, setImage] = useState(null);
+
     useEffect(() => {
         (async () => {
             const { status } = await Camera.requestCameraPermissionsAsync();
@@ -18,10 +21,23 @@ export const Add = () => {
     if (!hasPermission) {
         return <Text>No access to camera</Text>;
     }
+
+    const takePicture = async () => {
+        if (cameraRef?.current) {
+            const picture = await cameraRef.current.takePictureAsync(null);
+            setImage(picture.uri);
+        }
+    };
+
     return (
         <View style={{ flex: 1 }}>
             <View style={styles.cameraContainer}>
-                <Camera style={styles.fixedRatio} type={type} ratio={'1:1'} />
+                <Camera
+                    style={styles.fixedRatio}
+                    type={type}
+                    ratio={'1:1'}
+                    ref={cameraRef}
+                />
             </View>
             <Button
                 title={'Flip Image'}
@@ -33,6 +49,8 @@ export const Add = () => {
                     );
                 }}
             />
+            <Button title={'take photo'} onPress={() => takePicture()} />
+            {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
         </View>
     );
 };

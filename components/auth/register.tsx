@@ -45,8 +45,8 @@ class Register extends Component<{}, IRegisterState> {
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .then((result) => {
-                console.log(result);
+            .then(() => {
+                // console.log(result);
                 firebase
                     .firestore()
                     .collection('users')
