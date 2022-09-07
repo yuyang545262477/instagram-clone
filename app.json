@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yuyang545262477.instagram-clone"
     },
     "android": {
       "adaptiveIcon": {

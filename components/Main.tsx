@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchUser } from '../redux/actions';
-import Add from './main/Add';
+import { Add } from './main/Add';
 import Feed from './main/feed';
 import Profile from './main/profile';
 
@@ -32,8 +32,14 @@ class Main extends Component<any, any> {
                     }}
                 />
                 <Tab.Screen
-                    name="Add"
+                    name="_Add"
                     component={Add}
+                    listeners={({ navigation }) => ({
+                        tabPress: (event) => {
+                            event.preventDefault();
+                            navigation.navigate('Add');
+                        }
+                    })}
                     options={{
                         tabBarIcon: ({ color }) => (
                             <MaterialCommunityIcons
