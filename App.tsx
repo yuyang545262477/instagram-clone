@@ -71,21 +71,3 @@ export default class App extends Component<{}, AppState> {
         );
     }
 }
-
-// export default function App() {
-//     return (
-//         <NavigationContainer>
-//             <Stack.Navigator initialRouteName={'Landing'}>
-//                 <Stack.Screen
-//                     name={'Landing'}
-//                     component={Loading}
-//                     options={{
-//                         headerShown: false
-//                     }}
-//                 />
-//                 <Stack.Screen name={'Register'} component={Register} />
-//                 <Stack.Screen name={'Login'} component={Login} />
-//             </Stack.Navigator>
-//         </NavigationContainer>
-//     );
-// }

@@ -41,12 +41,20 @@ class Register extends Component<{}, IRegisterState> {
     }
 
     private onSignUp() {
-        const { password, email } = this.state;
+        const { password, email, name } = this.state;
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then((result) => {
                 console.log(result);
+                firebase
+                    .firestore()
+                    .collection('users')
+                    .doc(firebase.auth().currentUser.uid)
+                    .set({
+                        name,
+                        email
+                    });
             })
             .catch((error) => {
                 console.log(error);
