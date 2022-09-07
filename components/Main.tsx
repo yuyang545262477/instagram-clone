@@ -1,4 +1,4 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import React, { Component } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
@@ -8,7 +8,7 @@ import Add from './main/Add';
 import Feed from './main/feed';
 import Profile from './main/profile';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 class Main extends Component<any, any> {
     componentDidMount() {
@@ -17,11 +17,7 @@ class Main extends Component<any, any> {
 
     render() {
         return (
-            <Tab.Navigator
-                screenOptions={{
-                    headerShown: false
-                }}
-            >
+            <Tab.Navigator initialRouteName={'Feed'} labeled={false}>
                 <Tab.Screen
                     name="Feed"
                     component={Feed}
