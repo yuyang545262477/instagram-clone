@@ -5,7 +5,8 @@ import { isNil } from 'lodash';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Image, StyleSheet, Text, View } from 'react-native';
 
-export const Add = () => {
+export const Add = ({ navigation }) => {
+    console.log(navigation);
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
     const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
     const [type, setType] = useState<CameraType>(CameraType.back);
@@ -21,9 +22,11 @@ export const Add = () => {
             setHasGalleryPermission(galleryStatus.status === 'granted');
         })();
     }, []);
+
     if (isNil(hasCameraPermission) || isNil(hasGalleryPermission)) {
         return <View />;
     }
+
     if (!hasCameraPermission || !hasGalleryPermission) {
         return <Text>No access to camera</Text>;
     }
@@ -73,6 +76,10 @@ export const Add = () => {
             />
             <Button title={'take photo'} onPress={() => takePicture()} />
             <Button title={'pick Image'} onPress={() => pickImage()} />
+            <Button
+                title={'Save'}
+                onPress={() => navigation.navigate('Save', { image })}
+            />
             {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
         </View>
     );
