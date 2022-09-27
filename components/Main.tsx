@@ -7,6 +7,7 @@ import { fetchUser, fetchUserPosts } from '../redux/actions';
 import { Add } from './main/Add';
 import Feed from './main/feed';
 import Profile from './main/profile';
+import Search from './main/Search';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -26,6 +27,19 @@ class Main extends Component<any, any> {
                         tabBarIcon: ({ color }) => (
                             <MaterialCommunityIcons
                                 name={'home'}
+                                color={color}
+                                size={26}
+                            />
+                        )
+                    }}
+                />
+                <Tab.Screen
+                    name="Search"
+                    component={Search}
+                    options={{
+                        tabBarIcon: ({ color }) => (
+                            <MaterialCommunityIcons
+                                name={'magnify'}
                                 color={color}
                                 size={26}
                             />

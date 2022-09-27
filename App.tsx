@@ -80,9 +80,11 @@ export default class App extends Component<{}, AppState> {
                         <Stack.Screen
                             name={'Main'}
                             component={Main}
-                            options={{
-                                headerShown: false
-                            }}
+                            options={
+                                {
+                                    // headerShown: false
+                                }
+                            }
                         />
                         <Stack.Screen name={'Add'} component={Add} />
                         <Stack.Screen name={'Save'} component={Save} />
