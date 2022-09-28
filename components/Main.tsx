@@ -1,9 +1,14 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import firebase from 'firebase/compat';
 import React, { Component } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUser, fetchUserPosts } from '../redux/actions';
+import {
+    fetchUser,
+    fetchUserFollowing,
+    fetchUserPosts
+} from '../redux/actions';
 import { Add } from './main/Add';
 import Feed from './main/feed';
 import Profile from './main/profile';
@@ -15,6 +20,7 @@ class Main extends Component<any, any> {
     componentDidMount() {
         this.props.fetchUser();
         this.props.fetchUserPosts();
+        this.props.fetchUserFollowing();
     }
 
     render() {
@@ -68,6 +74,15 @@ class Main extends Component<any, any> {
                 <Tab.Screen
                     name="Profile"
                     component={Profile}
+                    listeners={({ navigation }) => ({
+                        tabPress: (event) => {
+                            console.log('tabPress');
+                            event.preventDefault();
+                            navigation.navigate('Profile', {
+                                uid: firebase.auth().currentUser.uid
+                            });
+                        }
+                    })}
                     options={{
                         tabBarIcon: ({ color }) => (
                             <MaterialCommunityIcons
@@ -87,6 +102,9 @@ const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser
 });
 const mapDispatchProps = (dispatch) =>
-    bindActionCreators({ fetchUser, fetchUserPosts }, dispatch);
+    bindActionCreators(
+        { fetchUser, fetchUserPosts, fetchUserFollowing },
+        dispatch
+    );
 
 export default connect(mapStateToProps, mapDispatchProps)(Main);
