@@ -80,6 +80,10 @@ const Profile = (props) => {
             .delete();
     };
 
+    const onLogout = () => {
+        firebase.auth().signOut();
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.containerInfo}>
@@ -100,7 +104,9 @@ const Profile = (props) => {
                             />
                         )}
                     </View>
-                ) : null}
+                ) : (
+                    <Button title={'Logout'} onPress={() => onLogout()} />
+                )}
             </View>
             <View style={styles.containerGallery}>
                 <FlatList
