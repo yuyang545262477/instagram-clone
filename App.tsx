@@ -11,6 +11,7 @@ import Login from './components/auth/login';
 import Register from './components/auth/register';
 import Main from './components/Main';
 import { Add } from './components/main/Add';
+import Comments from './components/main/Comment';
 import Save from './components/main/Save';
 import { firebaseConfig } from './private-config/firebase.config';
 import rootReducer from './redux/reducers';
@@ -88,6 +89,7 @@ export default class App extends Component<{}, AppState> {
                         />
                         <Stack.Screen name={'Add'} component={Add} />
                         <Stack.Screen name={'Save'} component={Save} />
+                        <Stack.Screen name={'Comments'} component={Comments} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </Provider>
